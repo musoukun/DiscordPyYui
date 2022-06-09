@@ -15,7 +15,7 @@ import datetime
 import shutil
 
 # Botのアクセストークン(操作対象のBOTのトークンを指定）
-TOKEN = 'NzEwMTAyMTgzNzIyNDgzNzIy.Xrvk2w.u2ApSIfnUoP5EL-VI6kQpJJSD4c'
+TOKEN = ''
 
 BOT_PREFIX = "/"
 
@@ -205,43 +205,6 @@ async def yuip(ctx, url: str = youtube_url):
     print("playing\n")
 
 
-# @bot.command(pass_context=True, aliases=['q', 'que'])
-# async def queue(ctx, url: str):
-#     Queue_infile = os.path.isdir("./Queue") #ディレクトリの存在確認
-#     if Queue_infile is False:
-#         os.mkdir("Queue")
-#     DIR = os.path.abspath(os.path.realpath("Queue")) #引数で指定したパスの絶対パスを返すメソッド
-#     q_num = len(os.listdir(DIR)) #指定したファイル・ディレクトリの一覧を確認し要素数を取得
-#     q_num += 1 #Queueが空の時に1曲追加する処理
-#     add_queue = True
-#     while add_queue:
-#         if q_num in queues:
-#             q_num += 1
-#         else:
-#             add_queue = False
-#             queues[q_num] = q_num
-
-#     queue_path = os.path.abspath(os.path.realpath("Queue") + f"\song{q_num}.%(ext)s") #キューに追加した曲のフルパスを取得
-
-#     #youtube_dlのオプション
-#     ydl_opts = {
-#         'format': 'bestaudio/best',
-#         'quiet': True,
-#         'outtmpl': queue_path,
-#         'postprocessors': [{
-#             'key': 'FFmpegExtractAudio',
-#             'preferredcodec': 'mp3',
-#             'preferredquality': '192',
-#         }],
-#     }
-
-#     #youtube_dlを取り込んで曲をDL
-#     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-#         print("Downloading audio now\n")
-#         ydl.download([url])
-#     await ctx.send("Adding song " + str(q_num) + " to the queue")
-
-#     print("Song added to queue\n")
 
 @bot.command()
 async def yuil(ctx):
