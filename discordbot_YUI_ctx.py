@@ -8,7 +8,6 @@ from discord.ext import commands
 from discord.utils import get
 from discord import FFmpegPCMAudio
 from os import system
-#googleSearch
 import googlesearch
 from googlesearch import search
 import datetime
@@ -29,11 +28,11 @@ queues = {}
 
 ##########  定数  ###########
 
-CHANNEL_ID = 711166774053306388 # 自分のチャンネルID(int)
 #CHANNEL_ID = 708668194344402947 # アニメかいのチャンネルID(int)
-ID_CHANNEL_WELCOME = 711166774053306388 # テストチャンネルのID(int)
 #ID_ROLE_WELCOME = 708692268558843914 # 付けたい役職のID(int)
 #EMOJI_WELCOME = '' # 対応する絵文字
+#ID_CHANNEL_WELCOME = 984488181527351318 # 自身のチャンネルのID(int)
+CHANNEL_ID = 984494996348616784 # 自分のチャンネルID(int)
 
 youtube_url = 'https://youtu.be/2SvspexYSb0?t=4' # youtubeのURLを指定 (YUIちゃんのボイス)
 #discord_voice_channel_id = 653273189467553822 # 特定のボイスチャンネルを指定
@@ -205,7 +204,6 @@ async def yuip(ctx, url: str = youtube_url):
     print("playing\n")
 
 
-
 @bot.command()
 async def yuil(ctx):
     if ctx.message.author.voice != None:
@@ -230,7 +228,7 @@ async def stop(ctx):
 
     if voice and voice.is_connected():
         if voice.is_playing():
-            await voice.pause()
+            voice.pause()
             print(f"The bot pause voice")
     else:
         print("Bot was told to leave voice channel, but was not in one")
@@ -261,7 +259,7 @@ async def gs(ctx):
     else:
         kensaku = msg.clean_content
         await ctx.send(kensaku + 'を1件検索します。')
-        for url in search(kensaku, lang="jp",stop = 1):
+        for url in search(kensaku, lang="jp",num_results = 1):
             await ctx.send(url)
 
 @bot.command()
@@ -270,13 +268,13 @@ async def gsa(ctx ,kensaku :str = '今期'):
     word = 'アニメ一覧 animatetimes'
     if kensaku == '今期':
         now = datetime.date.today()
-        if 1 <= now.month < 3:
+        if 1 <= now.month <= 3:
             konki = '冬'
-        elif 4 <= now.month < 6:
+        elif 4 <= now.month <= 6:
             konki = '春'
-        elif 7 <= now.month < 9:
+        elif 7 <= now.month <= 9:
             konki = '夏'
-        elif 10 <= now.month < 12:
+        elif 10 <= now.month <= 12:
             konki = '秋'
         kensaku = str(now.year)
         kensaku = kensaku + konki + word
@@ -285,7 +283,7 @@ async def gsa(ctx ,kensaku :str = '今期'):
     
     await ctx.send(kensaku + 'を検索します')
             
-    for url in search(kensaku, lang="jp",stop = 1):
+    for url in search(kensaku, lang="jp",num_results = 1):
         await ctx.send(url)
 
 ############## 接続 ################
